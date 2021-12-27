@@ -1,5 +1,5 @@
 import React from "react";
-import Screens from "./src/navigation";
+import Pages from "./src/pages/Pages";
 import context from "./src/context/context";
 
 const { AppProvider } = context;
@@ -7,7 +7,7 @@ const { AppProvider } = context;
 export default function App() {
   return (
     <AppProvider>
-      <Screens />
+      <Pages />
     </AppProvider>
   );
 }

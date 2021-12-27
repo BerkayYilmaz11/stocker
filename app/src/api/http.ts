@@ -1,6 +1,7 @@
 import axios from "axios";
-import { BASE_URL } from "../constants";
+import { AUTH_ERROR, BASE_URL } from "../constants";
 import storage from "../storage";
+import { Endpoints } from "../typings";
 import utils from "../utils";
 
 export interface ApiResponse<T> {
@@ -26,10 +27,10 @@ async function request<T>(
 ): Promise<any> {
   try {
     const url = `${BASE_URL}/${endpoint}`;
-    const token = await storage.getToken();
+    const token =
+      `/${endpoint}` !== Endpoints.LOGIN ? await storage.getToken() : undefined;
     if (utils.checkTokenExpired(token)) {
-      await utils.logout();
-      return Promise.reject("Token expired");
+      return Promise.reject(AUTH_ERROR);
     }
     let res;
     if (method === HttpMethod.GET) {

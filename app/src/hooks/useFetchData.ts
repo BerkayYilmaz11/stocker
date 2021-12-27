@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
 import { Endpoints } from "../typings";
+import context from "../context/context";
+import { AUTH_ERROR } from "../constants";
+
+const { useAppContext } = context;
 
 function useFetchData<T>(
   endpoint: Endpoints,
   params?: any,
-  onSuccess?: () => void,
-  onError?: () => void
+  onError?: () => void,
+  onSuccess?: () => void
 ) {
+  const { clearToken } = useAppContext();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(undefined);
   const [data, setData] = useState<T[]>([]);
 
   const onFetchError = (err: any) => {
+    if (err === AUTH_ERROR) {
+      clearToken();
+    }
     setError(err);
     if (onError) onError();
   };

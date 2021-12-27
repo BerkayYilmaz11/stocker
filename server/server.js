@@ -40,7 +40,6 @@ function isAuthenticated({ username, password }) {
 
 server.post("/auth/login", (req, res) => {
   const { username, password } = req.body;
-  console.log("REQ BODY ! ", req.body);
   if (isAuthenticated({ username, password }) === false) {
     const status = 401;
     const message = "Incorrect username or password";
@@ -74,5 +73,5 @@ server.use(/^(?!\/auth).*$/, (req, res, next) => {
 server.use(router);
 
 server.listen(3000, () => {
-  console.log("Run Auth API Server");
+  console.log("Run Server");
 });

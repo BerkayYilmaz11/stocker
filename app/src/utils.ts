@@ -9,9 +9,9 @@ function checkTokenExpired(token?: string | null) {
   return expireDate < new Date().getTime();
 }
 
-async function logout(setToken: any) {
+async function logout(clearToken?: () => void) {
   await storage.deleteToken();
-  setToken(null);
+  if (clearToken) clearToken();
 }
 
 function decimalSeperator(x: string): string {

@@ -1,10 +1,7 @@
 import React, { FC } from "react";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet } from "react-native";
 import context from "../../context/context";
 import LoginForm from "./LoginForm";
-import { RootStackParamList } from "../../navigation/RootStack";
-import { RootRoute } from "../../navigation/app-routes";
 import useLogin from "../../hooks/useLogin";
 import { View, Text } from "../../components";
 import useKeyboardVisible from "../../hooks/useKeyboardVisible";
@@ -12,22 +9,16 @@ import { LoginApiParams } from "../../api/api";
 
 const { useAppContext } = context;
 
-type Props = NativeStackScreenProps<RootStackParamList, RootRoute.AUTH>;
-
-const Login: FC<Props> = ({ navigation }) => {
+const Login: FC = () => {
   const { setToken } = useAppContext();
 
-  const { login, success, error, loading } = useLogin(setToken);
+  const { login, error, loading } = useLogin(setToken);
 
   const keyboardVisible = useKeyboardVisible();
 
   const onSubmitForm = (values: LoginApiParams) => {
     login(values);
   };
-
-  if (success) {
-    navigation.navigate(RootRoute.APP);
-  }
 
   return (
     <View style={styles.container}>

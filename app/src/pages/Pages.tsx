@@ -1,23 +1,15 @@
 import React, { FC } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components/native";
-import { RootRoute } from "./app-routes";
 import context from "../context/context";
 import { getTheme } from "../styles/theme";
 import { StatusBar } from "expo-status-bar";
-import AppNavigator from "./AppNavigator";
 import { SafeAreaView } from "react-native";
-import AppStack from "./AppStack";
-import AuthStack from "./AuthStack";
+import { AppNavigator, AppStack, AuthStack } from "../navigation";
 
 const { useAppContext } = context;
 
-export type RootStackParamList = {
-  [RootRoute.AUTH]: undefined;
-  [RootRoute.APP]: undefined;
-};
-
-const Screens: FC = () => {
+const Pages: FC = () => {
   const {
     state: { theme, token },
   } = useAppContext();
@@ -34,4 +26,4 @@ const Screens: FC = () => {
   );
 };
 
-export default Screens;
+export default Pages;

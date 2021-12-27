@@ -89,7 +89,14 @@ const useAppContext = () => {
     dispatch({ type: "setToken", data: { token, theme: state.theme } });
   };
 
-  return { state: context.state, setToken };
+  const clearToken = () => {
+    dispatch({
+      type: "setToken",
+      data: { token: undefined, theme: state.theme },
+    });
+  };
+
+  return { state: context.state, setToken, clearToken };
 };
 
 export default { AppProvider, useAppContext };

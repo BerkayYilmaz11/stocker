@@ -8,7 +8,6 @@ const loginApi = api[Endpoints.LOGIN];
 function useLogin(setToken: any) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
-  const [success, setSuccess] = useState(false);
 
   const login = (params: LoginApiParams) => {
     setError(undefined);
@@ -19,7 +18,6 @@ function useLogin(setToken: any) {
           async (res) => {
             setToken(res);
             await storage.setToken(res);
-            setSuccess(true);
           },
           async (err) => setError(err as string)
         )
@@ -27,7 +25,7 @@ function useLogin(setToken: any) {
     }, 1000);
   };
 
-  return { login, loading, error, success };
+  return { login, loading, error };
 }
 
 export default useLogin;

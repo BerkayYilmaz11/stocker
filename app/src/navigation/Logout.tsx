@@ -7,7 +7,7 @@ import context from "../context/context";
 const { useAppContext } = context;
 
 const Logout: FC = () => {
-  const { setToken } = useAppContext();
+  const { clearToken } = useAppContext();
   const logoutConfirmation = () => {
     Alert.alert("Warning", "Are you sure you want to sign out ?", [
       {
@@ -15,7 +15,7 @@ const Logout: FC = () => {
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
-      { text: "Yes", onPress: async () => await utils.logout(setToken) },
+      { text: "Yes", onPress: async () => await utils.logout(clearToken) },
     ]);
   };
   return (

@@ -1,3 +1,5 @@
-import Screens from "./Screens";
+import AppStack from "./AppStack";
+import AuthStack from "./AuthStack";
+import AppNavigator from "./AppNavigator";
 
-export default Screens;
+export { AppStack, AuthStack, AppNavigator };
